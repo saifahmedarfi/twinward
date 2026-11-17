@@ -1,0 +1,21 @@
+id: SC-02
+description: Broadcast/multicast packet storm raises the boundary drop-rate
+attack_technique: "MITRE ATT&CK for ICS: Network Denial of Service (T0814)"
+seed: 1002
+initial_conditions:
+  policy: baseline-v1
+  boundary_rate_limit: 50
+event_sequence:
+  - { t: 0,  target: boundary-firewall, action: set_mode, value: normal }
+  - { t: 40, target: boundary-firewall, action: inject, value: packet_storm, duration: 15 }
+ground_truth:
+  - label: packet_storm
+    window: [40, 55]
+    expected_detection: true
+    detection_type: presence
+    component: boundary-firewall
+    event_type: packet_storm_volume
+    expected_severity: high
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

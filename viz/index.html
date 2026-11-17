@@ -1,0 +1,557 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ProPS-Twin · Live Simulation</title>
+<style>
+  /* ---- Moonfly palette (terminalcolors.com/themes/moonfly) --------------- */
+  :root{
+    --bg:#080808; --bg1:#121212; --bg2:#1c1c1c; --bg3:#262626;
+    --fg:#bdbdbd; --bold:#eeeeee; --dim:#949494; --cursor:#9e9e9e;
+    --sel:#b2ceee;
+    --black:#323437; --red:#ff5d5d; --green:#8cc85f; --yellow:#e3c78a;
+    --blue:#80a0ff; --purple:#cf87e8; --cyan:#79dac8; --white:#c6c6c6;
+    --bred:#ff5189; --bgreen:#36c692; --byellow:#c6c684; --bblue:#74b2ff;
+    --bpurple:#ae81ff; --bcyan:#85dc85; --bwhite:#e4e4e4;
+    --line:#2b2b2b;
+    --mono:"SFMono-Regular", "JetBrains Mono","Fira Code",Consolas,
+           "DejaVu Sans Mono",Menlo,monospace;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;height:100%}
+  body{
+    background:var(--bg); color:var(--fg); font-family:var(--mono);
+    font-size:13px; line-height:1.45; padding:14px;
+    display:flex; flex-direction:column; gap:12px; min-height:100vh;
+  }
+  a{color:var(--bblue)}
+  .muted{color:var(--dim)}
+  .bold{color:var(--bold)}
+
+  /* ---- header ----------------------------------------------------------- */
+  header{display:flex; align-items:baseline; gap:14px; flex-wrap:wrap}
+  header h1{font-size:18px; margin:0; color:var(--bwhite); letter-spacing:.5px}
+  header h1 .accent{color:var(--purple)}
+  header .sub{color:var(--dim); font-size:12px}
+  .status{margin-left:auto; display:flex; align-items:center; gap:8px;
+    font-size:12px; padding:3px 10px; border:1px solid var(--line);
+    border-radius:4px; background:var(--bg1)}
+  .dot{width:9px;height:9px;border-radius:50%;background:var(--dim);
+    box-shadow:0 0 8px currentColor}
+  .status.live .dot{background:var(--bgreen);color:var(--bgreen)}
+  .status.offline .dot{background:var(--byellow);color:var(--byellow)}
+  .status.err .dot{background:var(--red);color:var(--red)}
+
+  /* ---- controls --------------------------------------------------------- */
+  .controls{display:flex; gap:14px; flex-wrap:wrap; align-items:flex-end;
+    background:var(--bg1); border:1px solid var(--line); border-radius:6px;
+    padding:12px 14px}
+  .ctrl{display:flex; flex-direction:column; gap:4px}
+  .ctrl label{font-size:11px; color:var(--dim); text-transform:uppercase; letter-spacing:.6px}
+  select,input[type=range]{font-family:var(--mono)}
+  select{background:var(--bg2); color:var(--fg); border:1px solid var(--line);
+    border-radius:4px; padding:5px 8px; font-size:13px; min-width:150px}
+  select:focus{outline:1px solid var(--blue)}
+  input[type=range]{width:150px; accent-color:var(--purple)}
+  .val{color:var(--bcyan); font-variant-numeric:tabular-nums}
+  button{font-family:var(--mono); font-size:13px; cursor:pointer;
+    border:1px solid var(--line); border-radius:4px; padding:7px 16px;
+    background:var(--bg2); color:var(--fg)}
+  button:hover{border-color:var(--blue); color:var(--bwhite)}
+  button.run{background:var(--bg3); color:var(--bgreen); border-color:#2f5a3f}
+  button.run:hover{border-color:var(--bgreen); box-shadow:0 0 10px #36c69233}
+  button.stop{color:var(--bred); border-color:#5a2f3f}
+  button:disabled{opacity:.4; cursor:not-allowed}
+  .desc{font-size:12px; color:var(--byellow)}
+
+  /* ---- timeline --------------------------------------------------------- */
+  .timeline-wrap{background:var(--bg1); border:1px solid var(--line);
+    border-radius:6px; padding:10px 14px}
+  .timeline-head{display:flex; justify-content:space-between; font-size:11px;
+    color:var(--dim); margin-bottom:6px}
+  .timeline-head .clock{color:var(--bcyan); font-size:13px; font-variant-numeric:tabular-nums}
+  .timeline{position:relative; height:26px; background:var(--bg); border-radius:3px;
+    border:1px solid var(--line); overflow:hidden}
+  .tl-gt{position:absolute; top:0; bottom:0; background:#ff518922;
+    border-left:1px solid var(--bred); border-right:1px solid var(--bred)}
+  .tl-gt.absence{background:#ae81ff22; border-color:var(--bpurple)}
+  .tl-gt span{position:absolute; top:2px; left:3px; font-size:9px; color:var(--bwhite);
+    white-space:nowrap; opacity:.85}
+  .tl-fill{position:absolute; top:0; bottom:0; left:0; width:0;
+    background:linear-gradient(90deg,#36c69200,#36c69233)}
+  .tl-head{position:absolute; top:0; bottom:0; width:2px; background:var(--bcyan);
+    box-shadow:0 0 8px var(--cyan); left:0}
+
+  /* ---- main grid -------------------------------------------------------- */
+  .grid{display:grid; grid-template-columns:300px 1fr 320px; gap:12px; flex:1; min-height:0}
+  @media(max-width:1200px){.grid{grid-template-columns:1fr}}
+  .panel{background:var(--bg1); border:1px solid var(--line); border-radius:6px;
+    display:flex; flex-direction:column; min-height:0; overflow:hidden}
+  .panel > h2{font-size:11px; text-transform:uppercase; letter-spacing:1px;
+    color:var(--dim); margin:0; padding:9px 12px; border-bottom:1px solid var(--line);
+    background:var(--bg2)}
+
+  /* estate */
+  .estate{padding:10px; overflow:auto; display:flex; flex-direction:column; gap:7px}
+  .zone-label{font-size:10px; color:var(--purple); text-transform:uppercase;
+    letter-spacing:1px; margin-top:6px}
+  .node{border:1px solid var(--line); border-left:3px solid var(--dim);
+    border-radius:4px; padding:7px 9px; background:var(--bg2); transition:.15s}
+  .node .name{color:var(--bwhite); font-size:12px}
+  .node .et{color:var(--dim); font-size:11px; margin-top:2px; min-height:14px;
+    white-space:nowrap; overflow:hidden; text-overflow:ellipsis}
+  .node .tags{display:flex; gap:6px; margin-top:4px; font-size:10px}
+  .node .tags span{padding:1px 6px; border-radius:3px; background:var(--bg3); color:var(--dim)}
+  .node.s-normal{border-left-color:var(--green)}
+  .node.s-anomalous{border-left-color:var(--yellow); background:#e3c78a0d}
+  .node.s-violation{border-left-color:var(--red); background:#ff5d5d0d}
+  .node.s-fault{border-left-color:var(--purple); background:#cf87e80d}
+  .node.pulse{box-shadow:0 0 0 1px currentColor inset}
+
+  /* terminal */
+  .term{flex:1; overflow:auto; padding:8px 10px; font-size:12px;
+    background:var(--bg); white-space:pre-wrap; word-break:break-word}
+  .term .ln{padding:1px 0}
+  .term .t{color:var(--dim)}
+  .term .comp{color:var(--bblue)}
+  .term .ev{color:var(--bwhite)}
+  .term .sev-low{color:var(--green)} .term .sev-medium{color:var(--yellow)}
+  .term .sev-high{color:var(--bred)} .term .sev-critical{color:var(--red)}
+  .term .st-normal{color:var(--green)} .term .st-anomalous{color:var(--yellow)}
+  .term .st-violation{color:var(--red)} .term .st-fault{color:var(--purple)}
+  .term .det{color:var(--cyan)}
+  .term .alert{color:var(--bred)} .term .probe{color:var(--bcyan)}
+  .term .sys{color:var(--purple)}
+  .cursor{display:inline-block;width:8px;height:14px;background:var(--cursor);
+    vertical-align:-2px;animation:blink 1s steps(1) infinite}
+  @keyframes blink{50%{opacity:0}}
+  .prompt{color:var(--bgreen); padding:2px 10px; border-top:1px solid var(--line);
+    background:var(--bg); font-size:12px}
+  .prompt .p{color:var(--purple)}
+
+  /* reward */
+  .reward{padding:12px; overflow:auto}
+  .R{font-size:34px; color:var(--bgreen); font-variant-numeric:tabular-nums; line-height:1}
+  .R small{font-size:12px;color:var(--dim)}
+  .formula{font-size:10px;color:var(--dim);margin:6px 0 14px}
+  .bar{margin-bottom:9px}
+  .bar .top{display:flex; justify-content:space-between; font-size:11px; margin-bottom:3px}
+  .bar .top .k{color:var(--bwhite)} .bar .top .w{color:var(--dim)}
+  .bar .track{height:7px; background:var(--bg3); border-radius:4px; overflow:hidden}
+  .bar .fill{height:100%; width:0; transition:width .4s; background:var(--bgreen)}
+  .bar.pen .fill{background:var(--bred)}
+  .counts{display:grid; grid-template-columns:repeat(3,1fr); gap:6px; margin-top:14px}
+  .counts div{background:var(--bg2); border:1px solid var(--line); border-radius:4px;
+    padding:6px; text-align:center}
+  .counts .n{font-size:16px; color:var(--bcyan); font-variant-numeric:tabular-nums}
+  .counts .l{font-size:9px; color:var(--dim); text-transform:uppercase}
+  .cov{margin-top:12px; font-size:11px; border-top:1px solid var(--line); padding-top:10px}
+  .cov .row{color:var(--byellow)}
+  footer{font-size:11px; color:var(--dim); text-align:center}
+</style>
+</head>
+<body>
+<header>
+  <h1>ProPS&#8209;Twin <span class="accent">//</span> live estate</h1>
+  <span class="sub">LLM-guided IT/OT security digital twin &middot; log-only evaluator</span>
+  <div class="status offline" id="status"><span class="dot"></span><span id="statusText">connecting…</span></div>
+</header>
+
+<div class="controls">
+  <div class="ctrl">
+    <label>scenario</label>
+    <select id="scenario"></select>
+  </div>
+  <div class="ctrl" style="flex:1;min-width:220px">
+    <label>incident</label>
+    <div class="desc" id="desc">—</div>
+  </div>
+  <div class="ctrl">
+    <label>speed <span class="val" id="speedVal">20×</span></label>
+    <input type="range" id="speed" min="2" max="120" value="20" step="2">
+  </div>
+  <div class="ctrl">
+    <label>access profile <span class="muted" id="apLock"></span></label>
+    <select id="accessProfile">
+      <option value="">— (scenario default)</option>
+      <option value="standard">standard</option>
+      <option value="strict">strict</option>
+      <option value="lockdown">lockdown</option>
+    </select>
+  </div>
+  <div class="ctrl">
+    <label>alert threshold <span class="val" id="atVal">default</span></label>
+    <input type="range" id="alertThreshold" min="0" max="5" value="0" step="1">
+  </div>
+  <div class="ctrl">
+    <button class="run" id="runBtn">▶ run</button>
+  </div>
+  <div class="ctrl">
+    <button class="stop" id="stopBtn" disabled>■ stop</button>
+  </div>
+</div>
+
+<div class="timeline-wrap">
+  <div class="timeline-head">
+    <span id="expId" class="muted">—</span>
+    <span class="clock">t = <span id="clock">000</span> / <span id="clockEnd">120</span> s</span>
+  </div>
+  <div class="timeline" id="timeline">
+    <div class="tl-fill" id="tlFill"></div>
+    <div class="tl-head" id="tlHead"></div>
+  </div>
+</div>
+
+<div class="grid">
+  <section class="panel">
+    <h2>estate · 5 components</h2>
+    <div class="estate" id="estate"></div>
+  </section>
+
+  <section class="panel">
+    <h2>event stream · stdout (JSON lines)</h2>
+    <div class="term" id="term"></div>
+    <div class="prompt"><span class="p">props-twin@idmz</span>:~$ <span id="promptMsg">idle</span><span class="cursor"></span></div>
+  </section>
+
+  <section class="panel">
+    <h2>reward · R(π)</h2>
+    <div class="reward">
+      <div class="R"><span id="rewardVal">—</span><small> / 0.85 max</small></div>
+      <div class="formula">R = w<sub>d</sub>D + w<sub>c</sub>C + w<sub>a</sub>A + w<sub>r</sub>Q − w<sub>f</sub>F − w<sub>l</sub>L</div>
+      <div id="bars"></div>
+      <div class="counts" id="counts"></div>
+      <div class="cov" id="cov"></div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  ProPS-Twin visualization · Moonfly theme · backend: <code id="backendUrl">—</code> ·
+  offline replay uses <code>demo_data.json</code> (real simulation output)
+</footer>
+
+<script>
+"use strict";
+// ------------------------------------------------------------------------- //
+// configuration
+// ------------------------------------------------------------------------- //
+const COMPONENTS = ["idmz-gateway","boundary-firewall","plc-edge","eng-station","telemetry-forwarder"];
+const ZONE = {"idmz-gateway":"idmz","boundary-firewall":"idmz","plc-edge":"field",
+              "eng-station":"supervisory","telemetry-forwarder":"control"};
+const ZONE_ORDER = ["idmz","supervisory","control","field"];
+const WEIGHTS = {D:0.30,C:0.25,A:0.20,Q:0.10,F:0.10,L:0.05};
+const GOOD = ["D","C","A","Q"], PEN = ["F","L"];
+const META = {D:"detection",C:"containment",A:"availability",Q:"recovery",F:"false-pos",L:"delay"};
+const MAX_LINES = 500;
+
+// backend candidates, tried in order; else offline replay from demo_data.json
+const CANDIDATES = [ "", "http://localhost:8008", "http://127.0.0.1:8008" ];
+
+let BACKEND = null;       // resolved base URL, or null => offline
+let DEMO = null;          // embedded dataset (offline mode)
+let SCENARIOS = [];       // [{id, description, window, ground_truth, ...}]
+let running = false, stopFlag = false, es = null, timer = null;
+
+const $ = s => document.querySelector(s);
+const el = id => document.getElementById(id);
+
+// ------------------------------------------------------------------------- //
+// boot: find a backend, else fall back to the offline dataset
+// ------------------------------------------------------------------------- //
+async function boot(){
+  for(const base of CANDIDATES){
+    try{
+      const r = await fetch(base + "/api/scenarios", {cache:"no-store"});
+      if(r.ok){
+        BACKEND = base; SCENARIOS = await r.json();
+        setStatus("live", "backend live · realtime SSE");
+        el("backendUrl").textContent = base || location.origin;
+        return initUI();
+      }
+    }catch(e){ /* try next */ }
+  }
+  // offline fallback
+  try{
+    const r = await fetch("./demo_data.json", {cache:"no-store"});
+    DEMO = await r.json();
+    SCENARIOS = DEMO.scenarios.map(s => ({
+      id:s.id, description:s.description, seed:s.seed, window:s.window,
+      ground_truth:s.ground_truth, has_probes:(s.reward.counts.probes>0)
+    }));
+    setStatus("offline", "offline replay · demo_data.json (real sim output)");
+    el("backendUrl").textContent = "none (static)";
+    lockLevers();
+    return initUI();
+  }catch(e){
+    setStatus("err", "no backend and no demo_data.json found");
+  }
+}
+
+function setStatus(cls, text){
+  const s = el("status"); s.className = "status " + cls;
+  el("statusText").textContent = text;
+}
+function lockLevers(){
+  el("accessProfile").disabled = true;
+  el("alertThreshold").disabled = true;
+  el("apLock").textContent = "(needs backend)";
+}
+
+function initUI(){
+  const sel = el("scenario"); sel.innerHTML = "";
+  SCENARIOS.forEach(s => {
+    const o = document.createElement("option");
+    o.value = s.id; o.textContent = s.id + " — " + shortDesc(s.description);
+    sel.appendChild(o);
+  });
+  sel.onchange = () => selectScenario(sel.value);
+  el("speed").oninput = e => el("speedVal").textContent = e.target.value + "×";
+  el("alertThreshold").oninput = e =>
+    el("atVal").textContent = e.target.value === "0" ? "default" : e.target.value;
+  el("runBtn").onclick = run;
+  el("stopBtn").onclick = stop;
+  buildEstate();
+  selectScenario(SCENARIOS[0].id);
+}
+
+function shortDesc(d){ return d.length > 42 ? d.slice(0,40)+"…" : d; }
+
+function scenarioById(id){ return SCENARIOS.find(s => s.id === id); }
+
+function selectScenario(id){
+  const s = scenarioById(id);
+  el("desc").textContent = s.description || "—";
+  const end = s.window.end;
+  el("clockEnd").textContent = end;
+  resetView(s);
+}
+
+// ------------------------------------------------------------------------- //
+// estate rendering
+// ------------------------------------------------------------------------- //
+function buildEstate(){
+  const wrap = el("estate"); wrap.innerHTML = "";
+  for(const z of ZONE_ORDER){
+    const zl = document.createElement("div");
+    zl.className = "zone-label"; zl.textContent = z + " zone";
+    wrap.appendChild(zl);
+    COMPONENTS.filter(c => ZONE[c] === z).forEach(c => {
+      const n = document.createElement("div");
+      n.className = "node s-normal"; n.id = "node-" + c;
+      n.innerHTML = `<div class="name">${c}</div>
+        <div class="et" id="et-${c}">normal · idle</div>
+        <div class="tags"><span id="st-${c}">normal</span><span id="sv-${c}">low</span></div>`;
+      wrap.appendChild(n);
+    });
+  }
+}
+function updateNode(ev){
+  const n = el("node-"+ev.component); if(!n) return;
+  n.className = "node pulse s-" + ev.state;
+  el("et-"+ev.component).textContent = ev.event_type;
+  el("st-"+ev.component).textContent = ev.state;
+  el("sv-"+ev.component).textContent = ev.severity;
+  setTimeout(() => n.classList.remove("pulse"), 220);
+}
+function resetNodes(){
+  COMPONENTS.forEach(c => {
+    const n = el("node-"+c); if(!n) return;
+    n.className = "node s-normal";
+    el("et-"+c).textContent = "normal · idle";
+    el("st-"+c).textContent = "normal"; el("sv-"+c).textContent = "low";
+  });
+}
+
+// ------------------------------------------------------------------------- //
+// timeline
+// ------------------------------------------------------------------------- //
+function renderTimeline(s){
+  const tl = el("timeline");
+  tl.querySelectorAll(".tl-gt").forEach(n => n.remove());
+  const end = s.window.end;
+  (s.ground_truth||[]).forEach(g => {
+    const [a,b] = g.window;
+    const d = document.createElement("div");
+    d.className = "tl-gt" + (g.detection_type === "absence" ? " absence" : "");
+    d.style.left = (a/end*100)+"%"; d.style.width = ((b-a)/end*100)+"%";
+    d.innerHTML = `<span>${g.label}</span>`;
+    tl.insertBefore(d, el("tlFill"));
+  });
+  el("tlFill").style.width = "0";
+  el("tlHead").style.left = "0";
+}
+function advanceTimeline(t, end){
+  const pct = Math.min(100, t/end*100);
+  el("tlFill").style.width = pct + "%";
+  el("tlHead").style.left = pct + "%";
+  el("clock").textContent = String(t).padStart(3,"0");
+}
+
+// ------------------------------------------------------------------------- //
+// terminal log
+// ------------------------------------------------------------------------- //
+function termLine(html, cls){
+  const t = el("term");
+  const atBottom = t.scrollHeight - t.scrollTop - t.clientHeight < 40;
+  const d = document.createElement("div");
+  d.className = "ln" + (cls ? " "+cls : "");
+  d.innerHTML = html;
+  t.appendChild(d);
+  while(t.children.length > MAX_LINES) t.removeChild(t.firstChild);
+  if(atBottom) t.scrollTop = t.scrollHeight;
+}
+function sysLine(msg){ termLine(`<span class="sys"># ${esc(msg)}</span>`); }
+function esc(s){ return String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c])); }
+
+function logEvent(ev){
+  const det = ev.details || {};
+  let detStr = "";
+  if("drop_rate" in det) detStr += ` drop=${(+det.drop_rate).toFixed(3)}`;
+  if("contained" in det) detStr += ` contained=${det.contained}`;
+  if("ok" in det) detStr += ` ok=${det.ok} lat=${det.latency_ms}ms`;
+  const isAlertish = (ev.state!=="normal");
+  const cls = ev.event_type==="probe_result" ? "probe" : (isAlertish ? "alert" : "");
+  termLine(
+    `<span class="t">[t=${String(ev.t).padStart(3,"0")}]</span> `+
+    `<span class="comp">${ev.component.padEnd(19)}</span> `+
+    `<span class="ev">${ev.event_type.padEnd(28)}</span> `+
+    `<span class="sev-${ev.severity}">${ev.severity.padEnd(8)}</span> `+
+    `<span class="st-${ev.state}">${ev.state.padEnd(10)}</span>`+
+    `<span class="det">${esc(detStr)}</span>`,
+    cls
+  );
+}
+
+// ------------------------------------------------------------------------- //
+// reward dashboard
+// ------------------------------------------------------------------------- //
+function renderReward(doc){
+  el("rewardVal").textContent = doc.reward.toFixed(4);
+  el("rewardVal").style.color = doc.reward >= 0.8 ? "var(--bgreen)"
+      : doc.reward >= 0.6 ? "var(--byellow)" : "var(--bred)";
+  const c = doc.reward_components, bars = el("bars"); bars.innerHTML = "";
+  const order = ["D","C","A","Q","F","L"];
+  order.forEach(k => {
+    const v = c[k], pen = PEN.includes(k);
+    const div = document.createElement("div");
+    div.className = "bar" + (pen ? " pen" : "");
+    div.innerHTML = `<div class="top"><span class="k">${k} · ${META[k]}</span>
+      <span class="w">w=${WEIGHTS[k].toFixed(2)} · ${v.toFixed(3)}</span></div>
+      <div class="track"><div class="fill" style="width:${Math.round(v*100)}%"></div></div>`;
+    bars.appendChild(div);
+  });
+  const ct = doc.counts, counts = el("counts"); counts.innerHTML = "";
+  [["TP",ct.TP],["FP",ct.FP],["FN",ct.FN],["G",ct.G],["B",ct.B],
+   ["alerts",ct.alerts],["probes",ct.probes],["probe ok",ct.probe_ok]].forEach(([l,n])=>{
+    const d = document.createElement("div");
+    d.innerHTML = `<div class="n">${n}</div><div class="l">${l}</div>`;
+    counts.appendChild(d);
+  });
+  const cov = el("cov");
+  if(doc.coverage && doc.coverage.length){
+    cov.innerHTML = "<div class='muted'>coverage (absence) :</div>" +
+      doc.coverage.map(r =>
+        `<div class="row">${r.label}: detected=${r.detected} gap=${(r.gap_len_s||0)}s`+
+        (r.gap_start!=null?` @t=${r.gap_start}`:"")+`</div>`).join("");
+  } else cov.innerHTML = "";
+}
+function clearReward(){
+  el("rewardVal").textContent = "—"; el("bars").innerHTML = "";
+  el("counts").innerHTML = ""; el("cov").innerHTML = "";
+}
+
+// ------------------------------------------------------------------------- //
+// run / stop
+// ------------------------------------------------------------------------- //
+function resetView(s){
+  el("term").innerHTML = ""; resetNodes(); clearReward();
+  renderTimeline(s); advanceTimeline(0, s.window.end);
+  el("expId").textContent = "—"; el("promptMsg").textContent = "idle";
+}
+
+function currentPolicyQuery(){
+  const p = new URLSearchParams();
+  const ap = el("accessProfile").value; if(ap) p.set("access_profile", ap);
+  const at = el("alertThreshold").value; if(at && at!=="0") p.set("alert_threshold", at);
+  return p;
+}
+
+function run(){
+  if(running) return;
+  const s = scenarioById(el("scenario").value);
+  resetView(s);
+  running = true; stopFlag = false;
+  el("runBtn").disabled = true; el("stopBtn").disabled = false; el("scenario").disabled = true;
+  const speed = +el("speed").value;
+  sysLine(`starting ${s.id} · ${BACKEND!==null ? "backend run (fresh simulation)" : "offline replay"}`);
+  if(BACKEND !== null) runBackend(s, speed);
+  else runOffline(s, speed);
+}
+
+function stop(){
+  stopFlag = true;
+  if(es){ es.close(); es = null; }
+  if(timer){ clearTimeout(timer); timer = null; }
+  finish("stopped");
+}
+
+function finish(msg){
+  running = false;
+  el("runBtn").disabled = false; el("stopBtn").disabled = true; el("scenario").disabled = false;
+  el("promptMsg").textContent = msg;
+  sysLine(msg);
+}
+
+// --- backend (realtime SSE) --------------------------------------------- //
+function runBackend(s, speed){
+  const q = currentPolicyQuery();
+  q.set("scenario", s.id); q.set("speed", speed);
+  const url = BACKEND + "/api/stream?" + q.toString();
+  es = new EventSource(url);
+  el("promptMsg").textContent = "streaming…";
+  es.addEventListener("meta", e => {
+    const m = JSON.parse(e.data);
+    el("expId").textContent = m.experiment_id +
+      "  ·  policy: profile=" + (m.policy.idmz_access_profile) +
+      " at=" + (+m.policy.alert_threshold).toFixed(1) +
+      " rt=" + (+m.policy.recovery_timeout);
+  });
+  es.addEventListener("tick", e => {
+    const d = JSON.parse(e.data);
+    advanceTimeline(d.t, d.end);
+    d.events.forEach(ev => { logEvent(ev); updateNode(ev); });
+  });
+  es.addEventListener("reward", e => renderReward(JSON.parse(e.data)));
+  es.addEventListener("done", e => { es.close(); es = null; finish("done ✓"); });
+  es.onerror = () => {
+    if(es){ es.close(); es = null; }
+    if(running) finish("stream error (backend stopped?)");
+  };
+}
+
+// --- offline (replay embedded real data) -------------------------------- //
+function runOffline(s, speed){
+  const data = DEMO.scenarios.find(x => x.id === s.id);
+  el("expId").textContent = data.experiment_id + "  ·  (offline · baseline policy)";
+  const end = data.window.end;
+  const byTick = {};
+  data.events.forEach(ev => { (byTick[ev.t] = byTick[ev.t] || []).push(ev); });
+  const dt = 1000 / speed;   // ms wall per simulated second
+  let t = 0;
+  function step(){
+    if(stopFlag) return;
+    advanceTimeline(t, end);
+    (byTick[t] || []).forEach(ev => { logEvent(ev); updateNode(ev); });
+    if(t >= end){ renderReward(data.reward); return finish("done ✓ (replay)"); }
+    t++; timer = setTimeout(step, dt);
+  }
+  el("promptMsg").textContent = "replaying…";
+  step();
+}
+
+boot();
+</script>
+</body>
+</html>

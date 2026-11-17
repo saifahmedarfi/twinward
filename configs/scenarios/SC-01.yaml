@@ -1,0 +1,21 @@
+id: SC-01
+description: Non-whitelisted inter-zone protocol crossing at the IDMZ boundary
+attack_technique: "MITRE ATT&CK for ICS: unauthorized inter-zone communication"
+seed: 1001
+initial_conditions:
+  idmz_profile: standard
+  protocol_whitelist: default
+  policy: baseline-v1
+event_sequence:
+  - { t: 0,  target: idmz-gateway, action: set_mode, value: normal }
+  - { t: 30, target: idmz-gateway, action: inject, value: inter_zone_protocol_anomaly, duration: 20 }
+ground_truth:
+  - label: inter_zone_protocol_anomaly
+    window: [30, 50]
+    expected_detection: true
+    detection_type: presence
+    component: idmz-gateway
+    event_type: inter_zone_protocol_anomaly
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

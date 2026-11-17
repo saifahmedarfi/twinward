@@ -1,0 +1,24 @@
+# Local development only. The real deployment uses Kubernetes (Phases 1-8).
+# This brings the five components up as HTTP services on one network so you can
+# drive them with curl before introducing kind/Wazuh.
+services:
+  idmz-gateway:
+    build: { context: ., dockerfile: services/idmz_gateway/Dockerfile }
+    environment: [GLOBAL_SEED=1001]
+    ports: ["8001:8000"]
+  boundary-firewall:
+    build: { context: ., dockerfile: services/boundary_firewall/Dockerfile }
+    environment: [GLOBAL_SEED=1001]
+    ports: ["8002:8000"]
+  plc-edge:
+    build: { context: ., dockerfile: services/plc_edge/Dockerfile }
+    environment: [GLOBAL_SEED=1001]
+    ports: ["8003:8000"]
+  eng-station:
+    build: { context: ., dockerfile: services/eng_station/Dockerfile }
+    environment: [GLOBAL_SEED=1001]
+    ports: ["8004:8000"]
+  telemetry-forwarder:
+    build: { context: ., dockerfile: services/telemetry_forwarder/Dockerfile }
+    environment: [GLOBAL_SEED=1001]
+    ports: ["8005:8000"]

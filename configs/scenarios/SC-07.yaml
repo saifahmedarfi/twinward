@@ -1,0 +1,27 @@
+id: SC-07
+description: Data-diode forwarding heartbeat pause (coverage gap), then recovery
+attack_technique: "MITRE ATT&CK for ICS: Loss of View / Denial of monitoring"
+seed: 1007
+initial_conditions:
+  policy: baseline-v1
+  recovery_timeout: 60
+event_sequence:
+  - { t: 0,  target: telemetry-forwarder, action: set_mode, value: normal }
+  - { t: 40, target: telemetry-forwarder, action: inject, value: heartbeat_pause, duration: 20 }
+ground_truth:
+  - label: forwarding_heartbeat_gap
+    window: [40, 60]
+    expected_detection: true
+    detection_type: absence        # missing heartbeat is the positive
+    component: telemetry-forwarder
+    event_type: diode_forwarding_health
+    cadence: 1
+    timeout: 5
+    measure_recovery: true         # Q = time until a healthy heartbeat resumes
+probes:
+  interval: 10                     # legitimate availability probe every 10s
+  sla_ms: 50
+  targets: [telemetry-forwarder]
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

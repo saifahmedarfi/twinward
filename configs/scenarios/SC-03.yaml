@@ -1,0 +1,21 @@
+id: SC-03
+description: Privilege escalation — a privileged command executed on the eng station
+attack_technique: "MITRE ATT&CK for ICS: Exploitation for Privilege Escalation"
+seed: 1003
+initial_conditions:
+  policy: baseline-v1
+  idmz_profile: standard
+event_sequence:
+  - { t: 0,  target: eng-station, action: set_mode, value: normal }
+  - { t: 50, target: eng-station, action: inject, value: privileged_command, duration: 1 }
+ground_truth:
+  - label: privileged_command_exec
+    window: [50, 51]
+    expected_detection: true
+    detection_type: presence
+    component: eng-station
+    event_type: privileged_command_exec
+    contain_expected: false        # baseline 'standard' profile detects but does not deny
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

@@ -1,0 +1,26 @@
+# Global estate configuration. Mounted read-only into every component (ConfigMap
+# `estate-config` in Kubernetes; read directly here for local runs).
+global_seed: 1001
+
+zones: [enterprise, idmz, supervisory, control, field]
+
+idmz_gateway:
+  drop_baseline: 0.01
+  drop_sigma: 0.004
+  alert_threshold: 3.0
+  idmz_access_profile: standard
+  protocol_whitelist: [P1, P2, P3]
+
+boundary_firewall:
+  drop_baseline: 0.02
+  boundary_rate_limit: 50
+
+plc_edge:
+  firmware_checksum: "sha256:baseline"
+
+eng_station: {}
+
+telemetry_forwarder:
+  mem_baseline: 0.45
+  jitter_baseline: 2.0
+  recovery_timeout: 60

@@ -1,0 +1,21 @@
+id: SC-05
+description: Missing audit — a required security-audit log is omitted from the stream
+attack_technique: "MITRE ATT&CK for ICS: Indicator Removal / Impair Logging"
+seed: 1005
+initial_conditions:
+  policy: baseline-v1
+event_sequence:
+  - { t: 0,  target: eng-station, action: set_mode, value: normal }
+  - { t: 40, target: eng-station, action: inject, value: audit_log_gap, duration: 30 }
+ground_truth:
+  - label: security_audit_log_gap
+    window: [40, 70]
+    expected_detection: true
+    detection_type: absence        # the POSITIVE is the missing event (Option b)
+    component: eng-station
+    event_type: security_audit_log # required periodic signal that disappears
+    cadence: 1
+    timeout: 5                     # coverage-gap alert after 5s with no audit record
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

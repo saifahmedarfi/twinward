@@ -1,0 +1,11 @@
+# Reward weights for R(pi) = w_d D + w_c C + w_a A + w_r Q - w_f F - w_l L.
+# Starting weights from the handbook (Step 5.3); justified by priorities:
+# missing an incident is worse than a delayed one; availability of legitimate
+# inter-zone work matters in industrial settings; false positives cause operator
+# fatigue. Perturb these in the Phase 7 sensitivity analysis.
+w_d: 0.30   # detection rate
+w_c: 0.25   # containment
+w_a: 0.20   # availability of legitimate work
+w_r: 0.10   # recovery score
+w_f: 0.10   # false-positive penalty
+w_l: 0.05   # detection-delay penalty

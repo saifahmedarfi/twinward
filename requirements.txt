@@ -1,0 +1,7 @@
+# Runtime dependencies for the estate components (HTTP path).
+# The simulation cores themselves use only the standard library.
+fastapi
+uvicorn[standard]
+pydantic>=2
+PyYAML
+# numpy  # optional: swap into the cores for richer seeded noise later

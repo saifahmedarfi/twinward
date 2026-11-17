@@ -1,0 +1,21 @@
+id: SC-06
+description: Remote/unauthenticated access outside the allowed channel and window
+attack_technique: "MITRE ATT&CK for ICS: Remote Services / unauthenticated access"
+seed: 1006
+initial_conditions:
+  policy: baseline-v1
+  idmz_profile: standard
+event_sequence:
+  - { t: 0,  target: idmz-gateway, action: set_mode, value: normal }
+  - { t: 45, target: idmz-gateway, action: inject, value: unauthenticated_access, duration: 8 }
+ground_truth:
+  - label: unauthenticated_access_attempt
+    window: [45, 53]
+    expected_detection: true
+    detection_type: presence
+    component: idmz-gateway
+    event_type: unauthenticated_access_attempt
+    contain_expected: false        # strict/lockdown profile would deny the remote request
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

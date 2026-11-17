@@ -1,0 +1,21 @@
+id: SC-04
+description: Zone-segmentation violation — a jump-host crossing to a protected control dest
+attack_technique: "MITRE ATT&CK for ICS: Lateral Tool Transfer / jump-host crossing"
+seed: 1004
+initial_conditions:
+  policy: baseline-v1
+  idmz_profile: standard
+event_sequence:
+  - { t: 0,  target: idmz-gateway, action: set_mode, value: normal }
+  - { t: 35, target: idmz-gateway, action: inject, value: jump_host_crossing, duration: 10 }
+ground_truth:
+  - label: idmz_jump_host_crossing
+    window: [35, 45]
+    expected_detection: true
+    detection_type: presence
+    component: idmz-gateway
+    event_type: idmz_jump_host_crossing
+    contain_expected: false        # strict/lockdown profile would deny at the boundary
+evaluation_window: { start: 0, end: 120 }
+benign_background: { rate_per_sec: 1 }
+reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]
