@@ -1,0 +1,1837 @@
+{
+  "generated_at": "2026-11-27T08:08:48+00:00",
+  "code_version": "7adbd37",
+  "ledger_backend": "postgresql",
+  "weights": {
+    "w_d": 0.3,
+    "w_c": 0.25,
+    "w_a": 0.2,
+    "w_r": 0.1,
+    "w_f": 0.1,
+    "w_l": 0.05
+  },
+  "baseline": [
+    {
+      "experiment_id": "exp-SC-01-1001-0001",
+      "scenario_id": "SC-01",
+      "policy_version": "baseline-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 968,
+        "log_retention": 1.0,
+        "log_lines": 968
+      },
+      "counts": {
+        "TP": 20,
+        "FP": 0,
+        "FN": 0,
+        "G": 20,
+        "B": 948,
+        "alerts": 20,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 968,
+      "trace_id": "8c45515eed52310b8f7800c90fd6e215",
+      "event_ids_sha256": "011fd3bd690abf4fcfe702e7402ae83d90ef077dad0b36f47d07e71adc5778f9",
+      "duration_s": 0.22350986899982672
+    },
+    {
+      "experiment_id": "exp-SC-02-1002-0001",
+      "scenario_id": "SC-02",
+      "policy_version": "baseline-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": 1.0,
+        "blocked_flow_count": 15,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 983,
+        "log_retention": 1.0,
+        "log_lines": 983
+      },
+      "counts": {
+        "TP": 15,
+        "FP": 0,
+        "FN": 0,
+        "G": 15,
+        "B": 953,
+        "alerts": 30,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 983,
+      "trace_id": "b21dcf80e9c8b7f1e1419b2c2b154563",
+      "event_ids_sha256": "82aafe4a9f0379b281d5cf4160302d3951d06d2385f9a0644a3ae37cd5c62f66",
+      "duration_s": 0.2243689960014308
+    },
+    {
+      "experiment_id": "exp-SC-03-1003-0001",
+      "scenario_id": "SC-03",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 1,
+        "recovery_time_s": null,
+        "retained_events": 967,
+        "log_retention": 1.0,
+        "log_lines": 967
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 966,
+        "alerts": 1,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 967,
+      "trace_id": "d8a2141ee7bbc7de6e194f9402b3fbe2",
+      "event_ids_sha256": "7e8a4162d1ead4474a1f29c25faa08d9345a43799d9d3fa6b8724984861f329e",
+      "duration_s": 0.2757155870058341
+    },
+    {
+      "experiment_id": "exp-SC-04-1004-0001",
+      "scenario_id": "SC-04",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 10,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0,
+        "G": 10,
+        "B": 958,
+        "alerts": 10,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "f9572300099a4332dba68f769d772a76",
+      "event_ids_sha256": "dbce82f7e3989b52a59515178bf996dc1d9337b0baee12081fc3b9286f3ef87e",
+      "duration_s": 0.32655828999122605
+    },
+    {
+      "experiment_id": "exp-SC-05-1005-0001",
+      "scenario_id": "SC-05",
+      "policy_version": "baseline-v1",
+      "reward": 0.8479166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 938,
+        "log_retention": 1.0,
+        "log_lines": 938
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 847,
+        "alerts": 0,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 938,
+      "trace_id": "511a744efffe24ba8d1746f198e239a6",
+      "event_ids_sha256": "ad86f0343f4d5f14567026947ba235e3f2c5cd5dac7b4c2cb02c04ff0fd691df",
+      "duration_s": 0.26182780099043157
+    },
+    {
+      "experiment_id": "exp-SC-06-1006-0001",
+      "scenario_id": "SC-06",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 8,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 8,
+        "FP": 0,
+        "FN": 0,
+        "G": 8,
+        "B": 960,
+        "alerts": 8,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "197d272888485cc7a440941112ec25a3",
+      "event_ids_sha256": "009156d70df074cf2ce68c43f6801401e9cb23328cb4a57bfa3f09f22715bdfb",
+      "duration_s": 0.29067992699856404
+    },
+    {
+      "experiment_id": "exp-SC-07-1007-0001",
+      "scenario_id": "SC-07",
+      "policy_version": "baseline-v1",
+      "reward": 0.7879166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.75,
+        "Q": 0.9,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 0.75,
+        "recovery": 0.9,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": 6.0,
+        "retained_events": 934,
+        "log_retention": 1.0,
+        "log_lines": 934
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 821,
+        "alerts": 0,
+        "probes": 12,
+        "probe_ok": 9
+      },
+      "n_events": 934,
+      "trace_id": "61ac6d802020a815511c3e5b507354e8",
+      "event_ids_sha256": "721d76867ab10b1e69c798c1b76276d461095db1550a6a82e80c41a36adc1d03",
+      "duration_s": 0.24461119499756023
+    }
+  ],
+  "reproducibility": {
+    "SC-01": {
+      "runs": 3,
+      "rewards": [
+        0.85
+      ],
+      "identical_reward": true
+    },
+    "SC-02": {
+      "runs": 3,
+      "rewards": [
+        0.85
+      ],
+      "identical_reward": true
+    },
+    "SC-03": {
+      "runs": 3,
+      "rewards": [
+        0.6
+      ],
+      "identical_reward": true
+    },
+    "SC-04": {
+      "runs": 3,
+      "rewards": [
+        0.6
+      ],
+      "identical_reward": true
+    },
+    "SC-05": {
+      "runs": 3,
+      "rewards": [
+        0.847917
+      ],
+      "identical_reward": true
+    },
+    "SC-06": {
+      "runs": 3,
+      "rewards": [
+        0.6
+      ],
+      "identical_reward": true
+    },
+    "SC-07": {
+      "runs": 3,
+      "rewards": [
+        0.787917
+      ],
+      "identical_reward": true
+    }
+  },
+  "reset": {
+    "SC-01": {
+      "first_experiment": "exp-SC-01-1001-0004",
+      "second_experiment": "exp-SC-01-1001-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-02": {
+      "first_experiment": "exp-SC-02-1002-0004",
+      "second_experiment": "exp-SC-02-1002-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-03": {
+      "first_experiment": "exp-SC-03-1003-0004",
+      "second_experiment": "exp-SC-03-1003-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-04": {
+      "first_experiment": "exp-SC-04-1004-0004",
+      "second_experiment": "exp-SC-04-1004-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-05": {
+      "first_experiment": "exp-SC-05-1005-0004",
+      "second_experiment": "exp-SC-05-1005-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-06": {
+      "first_experiment": "exp-SC-06-1006-0004",
+      "second_experiment": "exp-SC-06-1006-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    },
+    "SC-07": {
+      "first_experiment": "exp-SC-07-1007-0004",
+      "second_experiment": "exp-SC-07-1007-0005",
+      "steps": [
+        "restore_modes",
+        "restore_policy_baseline",
+        "flush_state",
+        "new_experiment_id"
+      ],
+      "all_normal_after_reset": true,
+      "payload_identical": true,
+      "payload_identical_without_reset": false,
+      "fresh_experiment_id": true
+    }
+  },
+  "policy_presets": {
+    "baseline-v1": {
+      "name": "baseline-v1",
+      "alert_threshold": 3.0,
+      "idmz_access_profile": "standard",
+      "boundary_rate_limit": 50,
+      "recovery_timeout": 60
+    },
+    "strict-v1": {
+      "name": "strict-v1",
+      "alert_threshold": 3.0,
+      "idmz_access_profile": "strict",
+      "boundary_rate_limit": 40,
+      "recovery_timeout": 60
+    },
+    "lockdown-v1": {
+      "name": "lockdown-v1",
+      "alert_threshold": 3.0,
+      "idmz_access_profile": "lockdown",
+      "boundary_rate_limit": 20,
+      "recovery_timeout": 60
+    },
+    "sensitive-v1": {
+      "name": "sensitive-v1",
+      "alert_threshold": 1.0,
+      "idmz_access_profile": "standard",
+      "boundary_rate_limit": 50,
+      "recovery_timeout": 30
+    }
+  },
+  "lever_check": [
+    {
+      "experiment_id": "exp-SC-01-1001-0004",
+      "scenario_id": "SC-01",
+      "policy_version": "baseline-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 968,
+        "log_retention": 1.0,
+        "log_lines": 968
+      },
+      "counts": {
+        "TP": 20,
+        "FP": 0,
+        "FN": 0,
+        "G": 20,
+        "B": 948,
+        "alerts": 20,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 968,
+      "trace_id": "831b7d58973a58c384809b6e498fdead",
+      "event_ids_sha256": "8beb2da682c914e05c05f3abb9a2875b7eb81b27dbc612207042d6debce4bbb0",
+      "duration_s": 0.23932907500420697
+    },
+    {
+      "experiment_id": "exp-SC-01-1001-0005",
+      "scenario_id": "SC-01",
+      "policy_version": "strict-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 968,
+        "log_retention": 1.0,
+        "log_lines": 968
+      },
+      "counts": {
+        "TP": 20,
+        "FP": 0,
+        "FN": 0,
+        "G": 20,
+        "B": 948,
+        "alerts": 20,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 968,
+      "trace_id": "a5631bf1bf22aa51fe935bd6d4c714b7",
+      "event_ids_sha256": "cee840e4b8cc42b2ec235d99bf697cee308936c003ff42bb0c53f42b83f929fe",
+      "duration_s": 0.27792986600252334
+    },
+    {
+      "experiment_id": "exp-SC-01-1001-0006",
+      "scenario_id": "SC-01",
+      "policy_version": "lockdown-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 968,
+        "log_retention": 1.0,
+        "log_lines": 968
+      },
+      "counts": {
+        "TP": 20,
+        "FP": 0,
+        "FN": 0,
+        "G": 20,
+        "B": 948,
+        "alerts": 20,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 968,
+      "trace_id": "bc6c8b30fc613b8bbb1f2f45f11733e4",
+      "event_ids_sha256": "5769e0dad1e0406e97f45769fc47d211ef114f8e3f5528a6bdfcf35a123dfa73",
+      "duration_s": 0.24893798000994138
+    },
+    {
+      "experiment_id": "exp-SC-01-1001-0007",
+      "scenario_id": "SC-01",
+      "policy_version": "sensitive-v1",
+      "reward": 0.8474683544303797,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.02531645569620253,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.45454545454545453,
+        "fp_rate": 0.02531645569620253,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 968,
+        "log_retention": 1.0,
+        "log_lines": 968
+      },
+      "counts": {
+        "TP": 20,
+        "FP": 24,
+        "FN": 0,
+        "G": 20,
+        "B": 948,
+        "alerts": 44,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 968,
+      "trace_id": "3c2c273483a80c9bc266155c3332c298",
+      "event_ids_sha256": "c1faa2c958d48f706f9063996e8a4a98758287f9a138164ee4dfd5528ae6a85f",
+      "duration_s": 0.3118819629889913
+    },
+    {
+      "experiment_id": "exp-SC-02-1002-0004",
+      "scenario_id": "SC-02",
+      "policy_version": "baseline-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": 1.0,
+        "blocked_flow_count": 15,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 983,
+        "log_retention": 1.0,
+        "log_lines": 983
+      },
+      "counts": {
+        "TP": 15,
+        "FP": 0,
+        "FN": 0,
+        "G": 15,
+        "B": 953,
+        "alerts": 30,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 983,
+      "trace_id": "642c597b5787624d73a10e6e1b577f4a",
+      "event_ids_sha256": "f2ae2535a91fe30dfbea951a76bc655caaa05ab004d93c8ec7071681294aef34",
+      "duration_s": 0.3599719549965812
+    },
+    {
+      "experiment_id": "exp-SC-02-1002-0005",
+      "scenario_id": "SC-02",
+      "policy_version": "strict-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": 1.0,
+        "blocked_flow_count": 15,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 983,
+        "log_retention": 1.0,
+        "log_lines": 983
+      },
+      "counts": {
+        "TP": 15,
+        "FP": 0,
+        "FN": 0,
+        "G": 15,
+        "B": 953,
+        "alerts": 30,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 983,
+      "trace_id": "22045b8fb33882b6194bd97979a33053",
+      "event_ids_sha256": "fc192b0de844b904587b7c1e23168c80f04db880bfc0200692444542f8e92e76",
+      "duration_s": 0.19125053599418607
+    },
+    {
+      "experiment_id": "exp-SC-02-1002-0006",
+      "scenario_id": "SC-02",
+      "policy_version": "lockdown-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": 1.0,
+        "blocked_flow_count": 15,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 983,
+        "log_retention": 1.0,
+        "log_lines": 983
+      },
+      "counts": {
+        "TP": 15,
+        "FP": 0,
+        "FN": 0,
+        "G": 15,
+        "B": 953,
+        "alerts": 30,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 983,
+      "trace_id": "d49f146e6827068040d741c64cc41a43",
+      "event_ids_sha256": "233c9e1ea4ad89a714d1eba444dd2be5a4da571579722421474de9589c4e9c18",
+      "duration_s": 0.3269453909888398
+    },
+    {
+      "experiment_id": "exp-SC-02-1002-0007",
+      "scenario_id": "SC-02",
+      "policy_version": "sensitive-v1",
+      "reward": 0.8472717733473242,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.02728226652675761,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.36585365853658536,
+        "fp_rate": 0.02728226652675761,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": 1.0,
+        "blocked_flow_count": 15,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 983,
+        "log_retention": 1.0,
+        "log_lines": 983
+      },
+      "counts": {
+        "TP": 15,
+        "FP": 26,
+        "FN": 0,
+        "G": 15,
+        "B": 953,
+        "alerts": 56,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 983,
+      "trace_id": "3178000183afec546470b3dcc210f433",
+      "event_ids_sha256": "0aff335ce06560d4db2ba4ec7ee5ee90b21331a8c763c0e6d45d6a301712ae44",
+      "duration_s": 0.25528958599898033
+    },
+    {
+      "experiment_id": "exp-SC-03-1003-0004",
+      "scenario_id": "SC-03",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 1,
+        "recovery_time_s": null,
+        "retained_events": 967,
+        "log_retention": 1.0,
+        "log_lines": 967
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 966,
+        "alerts": 1,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 967,
+      "trace_id": "41549359cecafde405461a298e99cd3e",
+      "event_ids_sha256": "d7dfd98bd22f85750e7cd4a0386c28c57aee119cf88a9d90cdfcab1619335dc0",
+      "duration_s": 0.2869033430033596
+    },
+    {
+      "experiment_id": "exp-SC-03-1003-0005",
+      "scenario_id": "SC-03",
+      "policy_version": "strict-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 1,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 967,
+        "log_retention": 1.0,
+        "log_lines": 967
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 966,
+        "alerts": 1,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 967,
+      "trace_id": "6cca0c5ce2929c01ef445a6b7185e0c0",
+      "event_ids_sha256": "6b2ae3e65df9d9fc53380a642ef1c37046777893b3c545ae0e2c0cd759a963b2",
+      "duration_s": 0.27542878199892584
+    },
+    {
+      "experiment_id": "exp-SC-03-1003-0006",
+      "scenario_id": "SC-03",
+      "policy_version": "lockdown-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 1,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 967,
+        "log_retention": 1.0,
+        "log_lines": 967
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 966,
+        "alerts": 1,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 967,
+      "trace_id": "9b848ef7e1b529fe4f30af4b942a29ce",
+      "event_ids_sha256": "11cb9b4aee6181d24eea819e907600e5045afc010260deacfe0c44180fbec444",
+      "duration_s": 0.30846573499729857
+    },
+    {
+      "experiment_id": "exp-SC-03-1003-0007",
+      "scenario_id": "SC-03",
+      "policy_version": "sensitive-v1",
+      "reward": 0.5972049689440994,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.027950310559006212,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.03571428571428571,
+        "fp_rate": 0.027950310559006212,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 1,
+        "recovery_time_s": null,
+        "retained_events": 967,
+        "log_retention": 1.0,
+        "log_lines": 967
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 27,
+        "FN": 0,
+        "G": 1,
+        "B": 966,
+        "alerts": 28,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 967,
+      "trace_id": "c654004c0df956862b2ac3526ccd4cf8",
+      "event_ids_sha256": "e459ac06b8267c2cfa5ebdfd8ec010d3ad40adc58455d763306089b7edd8b5cd",
+      "duration_s": 0.18145692501275335
+    },
+    {
+      "experiment_id": "exp-SC-04-1004-0004",
+      "scenario_id": "SC-04",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 10,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0,
+        "G": 10,
+        "B": 958,
+        "alerts": 10,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "e22d5386441eee6182c82a21848ea32d",
+      "event_ids_sha256": "8d2c2171b1f47fd9002c311ee406a9ac302887f5ea8ec9cd496b9dd2087c5e04",
+      "duration_s": 0.23881736099428963
+    },
+    {
+      "experiment_id": "exp-SC-04-1004-0005",
+      "scenario_id": "SC-04",
+      "policy_version": "strict-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 10,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0,
+        "G": 10,
+        "B": 958,
+        "alerts": 10,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "fe8c1210d9e2d6e879c438ab2533f7d0",
+      "event_ids_sha256": "6ad56543deae6a76912ca743f14baa668bd4e330623cc308ebb499705688ea1a",
+      "duration_s": 0.29012041399255395
+    },
+    {
+      "experiment_id": "exp-SC-04-1004-0006",
+      "scenario_id": "SC-04",
+      "policy_version": "lockdown-v1",
+      "reward": 0.65,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 0.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 10,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 10,
+        "FP": 0,
+        "FN": 0,
+        "G": 10,
+        "B": 958,
+        "alerts": 10,
+        "probes": 12,
+        "probe_ok": 0
+      },
+      "n_events": 980,
+      "trace_id": "0647e3e4da9eebe912363b0a444acdcb",
+      "event_ids_sha256": "5825b6d008e151183d176a4ca8ed1ae4fd06532168f8c0937a13003a46773f69",
+      "duration_s": 0.26892870500159916
+    },
+    {
+      "experiment_id": "exp-SC-04-1004-0007",
+      "scenario_id": "SC-04",
+      "policy_version": "sensitive-v1",
+      "reward": 0.5973903966597077,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.026096033402922755,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.2857142857142857,
+        "fp_rate": 0.026096033402922755,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 10,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 10,
+        "FP": 25,
+        "FN": 0,
+        "G": 10,
+        "B": 958,
+        "alerts": 35,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "e809671585a2074d9f41c178de9e8b4b",
+      "event_ids_sha256": "1d6f0e759d04a336dc04a3a6a785ee4aea4e99d91409e43479fba77ad63ad481",
+      "duration_s": 0.291127509000944
+    },
+    {
+      "experiment_id": "exp-SC-05-1005-0004",
+      "scenario_id": "SC-05",
+      "policy_version": "baseline-v1",
+      "reward": 0.8479166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 938,
+        "log_retention": 1.0,
+        "log_lines": 938
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 847,
+        "alerts": 0,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 938,
+      "trace_id": "60b3627f27956d64756671536726ff87",
+      "event_ids_sha256": "a517d53c191452dac6dd548f5825debb5d363e5d34fa8fef0e913e093e01ce23",
+      "duration_s": 0.2694212070055073
+    },
+    {
+      "experiment_id": "exp-SC-05-1005-0005",
+      "scenario_id": "SC-05",
+      "policy_version": "strict-v1",
+      "reward": 0.8479166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 938,
+        "log_retention": 1.0,
+        "log_lines": 938
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 847,
+        "alerts": 0,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 938,
+      "trace_id": "9b2498ac2baea02d61a41508501b7c9a",
+      "event_ids_sha256": "172338eaef9348863f063eea4b402b7526a17f21ad7f1588578ab0bbc95baf44",
+      "duration_s": 0.2887164299900178
+    },
+    {
+      "experiment_id": "exp-SC-05-1005-0006",
+      "scenario_id": "SC-05",
+      "policy_version": "lockdown-v1",
+      "reward": 0.8479166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 938,
+        "log_retention": 1.0,
+        "log_lines": 938
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 847,
+        "alerts": 0,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 938,
+      "trace_id": "5986eb2e35c52014064cde499f989184",
+      "event_ids_sha256": "62e8237fde233b5c66aa3485ab4fc17b96e45261a2900667a53877abf8e91ff7",
+      "duration_s": 0.26994697099144105
+    },
+    {
+      "experiment_id": "exp-SC-05-1005-0007",
+      "scenario_id": "SC-05",
+      "policy_version": "sensitive-v1",
+      "reward": 0.844728945297127,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.031877213695395513,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.03571428571428571,
+        "fp_rate": 0.031877213695395513,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 938,
+        "log_retention": 1.0,
+        "log_lines": 938
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 27,
+        "FN": 0,
+        "G": 1,
+        "B": 847,
+        "alerts": 27,
+        "probes": 0,
+        "probe_ok": 0
+      },
+      "n_events": 938,
+      "trace_id": "220eea5549288c7d152048c67b75c7f7",
+      "event_ids_sha256": "7aaedb3cc03e6cbb9911193da7a15da4cb691a5cccffc75f01b6920b9284d463",
+      "duration_s": 0.2396436220005853
+    },
+    {
+      "experiment_id": "exp-SC-06-1006-0004",
+      "scenario_id": "SC-06",
+      "policy_version": "baseline-v1",
+      "reward": 0.6,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 8,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 8,
+        "FP": 0,
+        "FN": 0,
+        "G": 8,
+        "B": 960,
+        "alerts": 8,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "a0ffa7eac559c6e69b014305ac5d675b",
+      "event_ids_sha256": "2d2a3e67a3dcb38d43e5a8d3d6a6999939ccf50dc7b6df7f14ae66a58f7c5a85",
+      "duration_s": 0.17953427800966892
+    },
+    {
+      "experiment_id": "exp-SC-06-1006-0005",
+      "scenario_id": "SC-06",
+      "policy_version": "strict-v1",
+      "reward": 0.85,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 8,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 8,
+        "FP": 0,
+        "FN": 0,
+        "G": 8,
+        "B": 960,
+        "alerts": 8,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "e33dfab9209063a7fbe3a257ead68880",
+      "event_ids_sha256": "f66ffe32f74fbdd10e83d0715f7d749248883969d9a2a93a572753c86bd683d8",
+      "duration_s": 0.25054994400124997
+    },
+    {
+      "experiment_id": "exp-SC-06-1006-0006",
+      "scenario_id": "SC-06",
+      "policy_version": "lockdown-v1",
+      "reward": 0.65,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.0,
+        "Q": 1.0,
+        "F": 0.0,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 0.0,
+        "containment": 1.0,
+        "availability": 0.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 8,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 8,
+        "FP": 0,
+        "FN": 0,
+        "G": 8,
+        "B": 960,
+        "alerts": 8,
+        "probes": 12,
+        "probe_ok": 0
+      },
+      "n_events": 980,
+      "trace_id": "029c118737b01a3d217502657c22848b",
+      "event_ids_sha256": "bceb37523160321a2bba87f138082c2b5d8d50790e538c3dd6d1625bee7f1ff1",
+      "duration_s": 0.23665218500536866
+    },
+    {
+      "experiment_id": "exp-SC-06-1006-0007",
+      "scenario_id": "SC-06",
+      "policy_version": "sensitive-v1",
+      "reward": 0.5972916666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 0.0,
+        "A": 1.0,
+        "Q": 1.0,
+        "F": 0.027083333333333334,
+        "L": 0.0
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.23529411764705882,
+        "fp_rate": 0.027083333333333334,
+        "detection_delay_s": 0.0,
+        "containment": 0.0,
+        "availability": 1.0,
+        "recovery": 1.0,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 8,
+        "recovery_time_s": null,
+        "retained_events": 980,
+        "log_retention": 1.0,
+        "log_lines": 980
+      },
+      "counts": {
+        "TP": 8,
+        "FP": 26,
+        "FN": 0,
+        "G": 8,
+        "B": 960,
+        "alerts": 34,
+        "probes": 12,
+        "probe_ok": 12
+      },
+      "n_events": 980,
+      "trace_id": "34793b3f22c71bdcb23d257e3c2b8ea2",
+      "event_ids_sha256": "5f0b5973418067067adb6c8834f6cb6c4abb0ff488bc88a7343da01fffaf0497",
+      "duration_s": 0.21369003600557335
+    },
+    {
+      "experiment_id": "exp-SC-07-1007-0004",
+      "scenario_id": "SC-07",
+      "policy_version": "baseline-v1",
+      "reward": 0.7879166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.75,
+        "Q": 0.9,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 0.75,
+        "recovery": 0.9,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": 6.0,
+        "retained_events": 934,
+        "log_retention": 1.0,
+        "log_lines": 934
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 821,
+        "alerts": 0,
+        "probes": 12,
+        "probe_ok": 9
+      },
+      "n_events": 934,
+      "trace_id": "98f3b0dae51ab20cce382f30cf868c12",
+      "event_ids_sha256": "8ccbce912899d0537fbc5ec732bc00f9c2c4658f9d5ff0365fb725671c504891",
+      "duration_s": 0.2868766379979206
+    },
+    {
+      "experiment_id": "exp-SC-07-1007-0005",
+      "scenario_id": "SC-07",
+      "policy_version": "strict-v1",
+      "reward": 0.7879166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.75,
+        "Q": 0.9,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 0.75,
+        "recovery": 0.9,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": 6.0,
+        "retained_events": 934,
+        "log_retention": 1.0,
+        "log_lines": 934
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 821,
+        "alerts": 0,
+        "probes": 12,
+        "probe_ok": 9
+      },
+      "n_events": 934,
+      "trace_id": "682fc0b739ac3d3e93d4dd46106dfc57",
+      "event_ids_sha256": "06ab3a68e31e70087b97dd569c8eb77fcf5635cd0036c48dec33eb41d91b02ff",
+      "duration_s": 0.27410961300483905
+    },
+    {
+      "experiment_id": "exp-SC-07-1007-0006",
+      "scenario_id": "SC-07",
+      "policy_version": "lockdown-v1",
+      "reward": 0.7879166666666667,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.75,
+        "Q": 0.9,
+        "F": 0.0,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 1.0,
+        "fp_rate": 0.0,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 0.75,
+        "recovery": 0.9,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": 6.0,
+        "retained_events": 934,
+        "log_retention": 1.0,
+        "log_lines": 934
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 0,
+        "FN": 0,
+        "G": 1,
+        "B": 821,
+        "alerts": 0,
+        "probes": 12,
+        "probe_ok": 9
+      },
+      "n_events": 934,
+      "trace_id": "ece2dc795da48f927afb2b8fe1d7b84d",
+      "event_ids_sha256": "477a85a3274757f9ae50ecb61581f796a327202244cd70c63773dfcc55478b07",
+      "duration_s": 0.26542042499931995
+    },
+    {
+      "experiment_id": "exp-SC-07-1007-0007",
+      "scenario_id": "SC-07",
+      "policy_version": "sensitive-v1",
+      "reward": 0.774627994315875,
+      "reward_components": {
+        "D": 1.0,
+        "C": 1.0,
+        "A": 0.75,
+        "Q": 0.8,
+        "F": 0.03288672350791717,
+        "L": 0.041666666666666664
+      },
+      "metrics": {
+        "detection_rate": 1.0,
+        "precision": 0.03571428571428571,
+        "fp_rate": 0.03288672350791717,
+        "detection_delay_s": 5.0,
+        "containment": 1.0,
+        "availability": 0.75,
+        "recovery": 0.8,
+        "severity_match": null,
+        "blocked_flow_count": 0,
+        "prohibited_flow_count": 0,
+        "recovery_time_s": 6.0,
+        "retained_events": 934,
+        "log_retention": 1.0,
+        "log_lines": 934
+      },
+      "counts": {
+        "TP": 1,
+        "FP": 27,
+        "FN": 0,
+        "G": 1,
+        "B": 821,
+        "alerts": 27,
+        "probes": 12,
+        "probe_ok": 9
+      },
+      "n_events": 934,
+      "trace_id": "93075dfc866ac1045719503713604598",
+      "event_ids_sha256": "9f1f8acb61bd99fda9f419340d5a4d94d0899acc21f54c0581e2873ff816e557",
+      "duration_s": 0.2658747100067558
+    }
+  ],
+  "exports": {
+    "prometheus_textfile": "/home/saifarfi/Volumetric/CSE499/results/metrics/props_twin.prom",
+    "pushgateway": true,
+    "otlp_endpoint": "http://127.0.0.1:4318",
+    "otel_evidence": "/home/saifarfi/Volumetric/CSE499/results/otel",
+    "ledger": "postgresql://props:***@127.0.0.1:55432/props_ledger"
+  },
+  "ledger": {
+    "backend": "postgresql",
+    "url": "postgresql://props:***@127.0.0.1:55432/props_ledger",
+    "experiments": 49,
+    "events": 47250,
+    "ground_truth": 49,
+    "resets": 7
+  },
+  "live_stack": {
+    "services": {
+      "idmz-gateway": {
+        "up": true,
+        "mode": "normal",
+        "t": 20,
+        "healthy": true
+      },
+      "boundary-firewall": {
+        "up": true,
+        "mode": "normal",
+        "t": 57,
+        "healthy": true
+      },
+      "plc-edge": {
+        "up": true,
+        "mode": "normal",
+        "t": 57,
+        "healthy": true
+      },
+      "eng-station": {
+        "up": true,
+        "mode": "normal",
+        "t": 57,
+        "healthy": true
+      },
+      "telemetry-forwarder": {
+        "up": true,
+        "mode": "normal",
+        "t": 57,
+        "healthy": true
+      }
+    },
+    "prometheus": {
+      "targets": [
+        {
+          "job": "estate",
+          "instance": "telemetry-forwarder:8000",
+          "health": "up"
+        },
+        {
+          "job": "estate",
+          "instance": "idmz-gateway:8000",
+          "health": "up"
+        },
+        {
+          "job": "estate",
+          "instance": "boundary-firewall:8000",
+          "health": "up"
+        },
+        {
+          "job": "estate",
+          "instance": "plc-edge:8000",
+          "health": "up"
+        },
+        {
+          "job": "estate",
+          "instance": "eng-station:8000",
+          "health": "up"
+        },
+        {
+          "job": "otel-collector",
+          "instance": "otel-collector:8888",
+          "health": "up"
+        },
+        {
+          "job": "pushgateway",
+          "instance": "pushgateway:9091",
+          "health": "up"
+        }
+      ],
+      "queries": {
+        "service_events_total": 415.0,
+        "runner_reward_series": null,
+        "collector_log_records_accepted": 45482.0,
+        "collector_spans_accepted": 192.0
+      }
+    },
+    "collector": {
+      "logs.jsonl": 68,
+      "traces.jsonl": 5
+    }
+  },
+  "wall_time_s": 13.65
+}

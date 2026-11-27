@@ -1,0 +1,7 @@
+# Over-restrictive: contains everything but starves legitimate inter-zone work
+# (availability cost). Used to show the security/availability trade-off.
+name: lockdown-v1
+alert_threshold: 3.0
+idmz_access_profile: lockdown
+boundary_rate_limit: 20
+recovery_timeout: 60

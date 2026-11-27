@@ -1,0 +1,7 @@
+# Hair-trigger detection: lowest alert threshold -> more false positives on
+# benign near-miss readings (detection/false-positive trade-off).
+name: sensitive-v1
+alert_threshold: 1.0
+idmz_access_profile: standard
+boundary_rate_limit: 50
+recovery_timeout: 30

@@ -85,6 +85,7 @@ class EventSink:
         stream=sys.stdout,
         collect: bool = False,
         clock: Callable[[], dt.datetime] | None = None,
+        hooks: list[Callable[[dict], None]] | None = None,
     ) -> None:
         self.experiment_id = experiment_id
         self.scenario_id = scenario_id
@@ -92,8 +93,16 @@ class EventSink:
         self.stream = stream
         self.collect = collect
         self.clock = clock
+        # observers called with every emitted record (telemetry exporters:
+        # Prometheus counters, OpenTelemetry log records, JSONL writers)
+        self.hooks: list[Callable[[dict], None]] = list(hooks or [])
         self.events: list[dict] = []
         self._seq: dict[str, int] = {}
+
+    def reset(self) -> None:
+        """Drop collected events and restart every per-component sequence."""
+        self.events = []
+        self._seq = {}
 
     def emit(
         self,
@@ -123,4 +132,6 @@ class EventSink:
             self.events.append(rec)
         if self.stream is not False:
             write_line(rec, self.stream)
+        for hook in self.hooks:
+            hook(rec)
         return rec

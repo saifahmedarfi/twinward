@@ -1,24 +1,93 @@
-# Local development only. The real deployment uses Kubernetes (Phases 1-8).
-# This brings the five components up as HTTP services on one network so you can
-# drive them with curl before introducing kind/Wazuh.
+# Local development stack (proposal Phase 2-3). The real deployment uses
+# Kubernetes (Phase 6). Everything binds to 127.0.0.1 only: this is an isolated
+# simulation with no route to any real control system.
+#
+#   make stack-up      build + start everything
+#   make phase3-live   run the Phase 3 suite against this stack
+#   make stack-down
+#
+# Credentials below are for this throwaway local database only.
+x-estate: &estate
+  build: { context: . }
+  environment: &estate-env
+    GLOBAL_SEED: "1001"
+    ESTATE_CONFIG: /config/estate-config.yaml
+    TICK_INTERVAL_S: "1.0"
+    EVENT_STDOUT: "1"
+    OTEL_EXPORTER_OTLP_ENDPOINT: http://otel-collector:4318
+  volumes:
+    - ./configs/estate:/config:ro
+  depends_on: [otel-collector]
+  restart: unless-stopped
+
 services:
   idmz-gateway:
+    <<: *estate
     build: { context: ., dockerfile: services/idmz_gateway/Dockerfile }
-    environment: [GLOBAL_SEED=1001]
-    ports: ["8001:8000"]
+    image: props-twin/idmz-gateway:dev
+    ports: ["127.0.0.1:8001:8000"]
   boundary-firewall:
+    <<: *estate
     build: { context: ., dockerfile: services/boundary_firewall/Dockerfile }
-    environment: [GLOBAL_SEED=1001]
-    ports: ["8002:8000"]
+    image: props-twin/boundary-firewall:dev
+    ports: ["127.0.0.1:8002:8000"]
   plc-edge:
+    <<: *estate
     build: { context: ., dockerfile: services/plc_edge/Dockerfile }
-    environment: [GLOBAL_SEED=1001]
-    ports: ["8003:8000"]
+    image: props-twin/plc-edge:dev
+    ports: ["127.0.0.1:8003:8000"]
   eng-station:
+    <<: *estate
     build: { context: ., dockerfile: services/eng_station/Dockerfile }
-    environment: [GLOBAL_SEED=1001]
-    ports: ["8004:8000"]
+    image: props-twin/eng-station:dev
+    ports: ["127.0.0.1:8004:8000"]
   telemetry-forwarder:
+    <<: *estate
     build: { context: ., dockerfile: services/telemetry_forwarder/Dockerfile }
-    environment: [GLOBAL_SEED=1001]
-    ports: ["8005:8000"]
+    image: props-twin/telemetry-forwarder:dev
+    ports: ["127.0.0.1:8005:8000"]
+
+  # --- observability + evidence plane ------------------------------------
+  otel-collector:
+    image: otel/opentelemetry-collector-contrib:0.111.0
+    command: ["--config=/etc/otelcol/config.yaml"]
+    volumes:
+      - ./deploy/otel-collector.yaml:/etc/otelcol/config.yaml:ro
+      - ./results/collector:/var/otel
+    ports: ["127.0.0.1:4318:4318", "127.0.0.1:4317:4317"]
+    restart: unless-stopped
+
+  prometheus:
+    image: prom/prometheus:v2.55.1
+    command: ["--config.file=/etc/prometheus/prometheus.yml",
+              "--storage.tsdb.retention.time=7d"]
+    volumes:
+      - ./deploy/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+      - prometheus-data:/prometheus
+    ports: ["127.0.0.1:9090:9090"]
+    restart: unless-stopped
+
+  pushgateway:
+    image: prom/pushgateway:v1.10.0
+    ports: ["127.0.0.1:9091:9091"]
+    restart: unless-stopped
+
+  ledger-db:
+    image: postgres:16-alpine
+    environment:
+      POSTGRES_USER: props
+      POSTGRES_PASSWORD: props-local-only
+      POSTGRES_DB: props_ledger
+    volumes:
+      - ledger-data:/var/lib/postgresql/data   # experiment history survives restarts
+    ports: ["127.0.0.1:55432:5432"]
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U props -d props_ledger"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+    restart: unless-stopped
+
+volumes:
+  prometheus-data:
+  ledger-data:

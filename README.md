@@ -8,6 +8,36 @@ proposes bounded defensive policies that are validated, applied and scored.
 This repo is scaffolded **simulation-first**. The simulation core runs today in
 a bare terminal. Wazuh and the LLM/ProPS loop come in later phases.
 
+## Primary entry point: `main.py`
+
+```bash
+python main.py phase3                     # whole Phase 3 run -> results/phase3/report.md
+python main.py run SC-04 --preset strict-v1
+python main.py run SC-04 --policy idmz_access_profile=lockdown
+python main.py reset all                  # run -> reset -> re-run checks (Step 3.4)
+python main.py ledger                     # recorded experiments
+```
+
+Each run is one recorded experiment: unique id, config snapshot, policy, events,
+metrics, reward, status -> **ledger** (SQLite by default, PostgreSQL via
+`PROPS_DB_URL`); structured **JSONL log** per experiment; an **OpenTelemetry**
+trace (configure / simulate / evaluate / persist) with trace-correlated log
+records; **Prometheus** metrics (textfile + Pushgateway).
+
+### Full observability stack (Docker)
+
+```bash
+make stack-up        # 5 estate services + OTel Collector + Prometheus + Pushgateway + PostgreSQL
+make phase3-live     # same Phase 3 run, exporting to the stack
+make status          # services, Prometheus targets, collector evidence
+make stack-down
+```
+
+Ports (127.0.0.1 only): services 8001-8005, Prometheus 9090, Pushgateway 9091,
+OTLP 4318, PostgreSQL 55432. Services expose `/healthz /state /control/mode
+/policy /tick /probe /reset /events /metrics` and emit live telemetry every
+second.
+
 ## Quick start (no cluster, no dependencies)
 
 ```bash
@@ -62,12 +92,14 @@ wazuh/ k8s/ cluster/    <-- Phases 1 and 4
 
 ## Where this sits in the handbook
 
-- **Built now:** Phase 2 (estate simulator), the headless half of Phase 3
-  (scenario engine) for all seven scenarios SC-01..SC-07, and the Phase 5
-  evaluation engine (log-only / fast-mode path: metrics + reward, see
-  [docs/metrics.md](docs/metrics.md)).
-- **Next:** the reset path (Step 3.4), then Phase 1 (kind + Calico) and Phase 4
-  (Wazuh) to add the Wazuh-in-the-loop evaluation subset and reach `milestone-1`.
+- **Built now:** Phase 2 (estate simulator); Phase 3 complete — seven scenarios
+  SC-01..SC-07, Pydantic scenario schema, reset path, live estate/reward config,
+  experiment ledger (SQLite/PostgreSQL), structured logs, OpenTelemetry traces +
+  logs, Prometheus metrics, docker-compose observability stack; and the Phase 5
+  evaluation engine (log-only / fast-mode path, see [docs/metrics.md](docs/metrics.md)).
+- **Next:** Phase 4 of the proposal — Policy Engine (bounds + hard constraints)
+  and the ProPS/LLM loop with random-search and conventional-optimizer
+  baselines; then Wazuh-in-the-loop and Kubernetes.
 - **After the simulation is solid:** Phase 6 (Policy Engine + LLM/ProPS loop);
   the policy levers (`alert_threshold`, access profile, rate limit, recovery
   timeout) already move the reward, so the optimizer has a real search space.

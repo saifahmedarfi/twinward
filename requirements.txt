@@ -1,7 +1,10 @@
-# Runtime dependencies for the estate components (HTTP path).
-# The simulation cores themselves use only the standard library.
+# Runtime dependencies. The simulation cores themselves use only the standard
+# library; everything below is optional and degrades to a no-op when missing.
 fastapi
 uvicorn[standard]
-pydantic>=2
-PyYAML
-# numpy  # optional: swap into the cores for richer seeded noise later
+pydantic>=2                              # scenario schema (Step 3.1)
+PyYAML                                   # canonical scenario / estate / reward / policy YAML
+prometheus_client                        # Prometheus-style metrics
+opentelemetry-sdk                        # traces + correlated log records
+opentelemetry-exporter-otlp-proto-http   # OTLP/HTTP to the OTel Collector
+psycopg[binary]                          # PostgreSQL experiment ledger

@@ -1,0 +1,24 @@
+# Prometheus — Prometheus-style metrics for the twin (proposal §7.1).
+global:
+  scrape_interval: 5s
+  evaluation_interval: 5s
+
+scrape_configs:
+  # live estate services: /metrics on each container
+  - job_name: estate
+    static_configs:
+      - targets:
+          - idmz-gateway:8000
+          - boundary-firewall:8000
+          - plc-edge:8000
+          - eng-station:8000
+          - telemetry-forwarder:8000
+  # batch experiment runs push here (reward, components, counts, retention)
+  - job_name: pushgateway
+    honor_labels: true
+    static_configs:
+      - targets: [pushgateway:9091]
+  # collector self-metrics: accepted / exported spans and log records
+  - job_name: otel-collector
+    static_configs:
+      - targets: [otel-collector:8888]

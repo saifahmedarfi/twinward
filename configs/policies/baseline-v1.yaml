@@ -1,0 +1,6 @@
+# Fixed baseline policy (proposal §6.4: "the initial fixed configuration").
+name: baseline-v1
+alert_threshold: 3.0
+idmz_access_profile: standard
+boundary_rate_limit: 50
+recovery_timeout: 60

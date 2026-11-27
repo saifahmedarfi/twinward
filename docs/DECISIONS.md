@@ -42,3 +42,31 @@ Add a dated line for every design choice. Started 2026-11-07.
 - 2026-11-08  SC-05 (absence) is modelled on the eng-station: in normal mode it
   emits a periodic `security_audit_log`; the `audit_log_gap` mode keeps the host
   alive and compliant but omits that one required audit event (Option b coverage).
+- 2026-11-27  Phase 3 completed: scenarios + telemetry. `main.py` is the primary
+  entry point (`python main.py phase3` runs everything and writes
+  `results/phase3/report.{md,json}`).
+- 2026-11-27  `estate-config.yaml` and `reward.yaml` are now read on every run
+  (research/common/config.py). Effective policy = estate baseline <- scenario
+  `initial_conditions` <- candidate policy; candidate levers are applied through
+  each core's `apply_policy()`. Baseline rewards are byte-identical to before.
+- 2026-11-27  Reset path (Step 3.4) is real: `TwinController.reset()` executes the
+  scenario's `reset_procedure`. A run on a dirty twin auto-resets first (keeping
+  any policy set for the next run). Verified per scenario: identical payload after
+  reset, *different* payload when the reset is bypassed (control), fresh id.
+- 2026-11-27  Scenario schema is a Pydantic v2 model (unknown actions/targets/reset
+  steps, inverted windows and windows past the evaluation end are rejected); the
+  plain validator remains the stdlib fallback.
+- 2026-11-27  Observability split: Prometheus = numbers (service /metrics scraped;
+  batch runs pushed to a Pushgateway + textfile), OpenTelemetry = evidence (one
+  trace per experiment with configure/simulate/evaluate/persist spans; one OTel
+  log record per event, trace-correlated) -> Collector -> JSONL files, ledger =
+  authoritative record (PostgreSQL via PROPS_DB_URL, SQLite otherwise). Trace and
+  span ids live in the ledger and log files only, never in the event stream the
+  detector reads.
+- 2026-11-27  Experiment ids are unique per ledger: the run counter is the next
+  free counter for (scenario, seed), so repeated runs never overwrite evidence.
+- 2026-11-27  SC-04 and SC-06 gained an idmz-gateway availability probe so the
+  over-restrictive `lockdown` profile shows its availability cost (A=0). Baseline
+  rewards unchanged (probes all pass under `standard`). SC-01 left untouched.
+- 2026-11-27  Added proposal Table 3 metrics to each record: blocked vs
+  prohibited flow counts, recovery time, retained event records / log retention.

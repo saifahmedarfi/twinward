@@ -4,8 +4,14 @@ RUN useradd --uid 10001 --create-home app
 WORKDIR /app
 COPY services/plc_edge/requirements.txt .
 RUN pip install -r requirements.txt
-COPY services/plc_edge/ ./services/plc_edge/
+COPY research/__init__.py ./research/__init__.py
 COPY research/common/ ./research/common/
-RUN touch research/__init__.py services/__init__.py
+COPY research/evaluation/ ./research/evaluation/
+COPY research/telemetry/ ./research/telemetry/
+COPY services/__init__.py ./services/__init__.py
+COPY services/common/ ./services/common/
+COPY services/plc_edge/ ./services/plc_edge/
 USER 10001
+EXPOSE 8000
+HEALTHCHECK --interval=10s --timeout=3s CMD python -c "import urllib.request;urllib.request.urlopen('http://127.0.0.1:8000/healthz')"
 CMD ["uvicorn", "services.plc_edge.main:app", "--host", "0.0.0.0", "--port", "8000"]

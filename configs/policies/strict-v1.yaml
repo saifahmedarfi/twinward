@@ -1,0 +1,6 @@
+# Tighter boundary: deny crossings / remote access before effect, throttle storms.
+name: strict-v1
+alert_threshold: 3.0
+idmz_access_profile: strict
+boundary_rate_limit: 40
+recovery_timeout: 60

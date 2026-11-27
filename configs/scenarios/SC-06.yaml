@@ -16,6 +16,10 @@ ground_truth:
     component: idmz-gateway
     event_type: unauthenticated_access_attempt
     contain_expected: false        # strict/lockdown profile would deny the remote request
+probes:
+  interval: 10                     # legitimate inter-zone work; lockdown starves it (A cost)
+  sla_ms: 50
+  targets: [idmz-gateway]
 evaluation_window: { start: 0, end: 120 }
 benign_background: { rate_per_sec: 1 }
 reset_procedure: [restore_modes, restore_policy_baseline, flush_state, new_experiment_id]

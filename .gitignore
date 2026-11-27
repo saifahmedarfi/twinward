@@ -24,3 +24,7 @@ results/*.sqlite
 # OS
 .DS_Store
 Thumbs.db
+results/logs/
+results/otel/
+results/metrics/
+results/collector/
